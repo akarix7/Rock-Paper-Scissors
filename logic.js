@@ -25,17 +25,6 @@ function youLose(playerSelection, computerSelection){
 
 function playRound(playerSelection, computerSelection){
     let lowerCaseInput = playerSelection.toLowerCase();
-    // let playerNumericalSelection = 0;
-    //
-    // if(lowerCaseInput === "rock"){
-    //     playerNumericalSelection = 1;
-    // }else if(lowerCaseInput === "paper"){
-    //     playerNumericalSelection = 2;
-    // }else if(lowerCaseInput === "scissors"){
-    //     playerNumericalSelection = 3;
-    // }else{
-    //     return "Input only rock, paper, or scissors!";
-    // }
 
     if(lowerCaseInput !== computerSelection){
         if(lowerCaseInput === "rock" && computerSelection === "scissors"){
@@ -55,9 +44,32 @@ function playRound(playerSelection, computerSelection){
         return "Tie, play again!";
     }
 
-    return "hey";
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for(let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Rock, paper, or scissors?");
+        const computerSelection = getComputerChoice();
+        let results = playRound(playerSelection, computerSelection);
+        if (results.includes("win")) {
+            playerScore += 1;
+        } else if (results.includes("lose")) {
+            computerScore += 1;
+        }
+    }
+
+    if(playerScore === computerScore){
+        console.log("Play another game, it's a tie!");
+    }
+
+    if(playerScore > computerScore){
+        console.log("Congratulation you won! " + playerScore + " to " + computerScore);
+    }else{
+        console.log("Sorry you lost! " + computerScore + " to " + playerScore);
+    }
+}
+
+game();
