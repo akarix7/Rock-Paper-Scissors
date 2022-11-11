@@ -9,8 +9,17 @@ const setScore = (player, computer) => {
     score.computerScore = computer;
 };
 
-const round = document.getElementById("round-msg");
-const resultMessage = document.getElementsByClassName("result-message");
+let round = {
+    count: 0
+};
+
+const getRoundCount = () => round.count;
+const setRound = () => {
+    round.count += 1;
+}
+
+const roundCount = document.getElementById("round-msg");
+const resultMessage = document.getElementById("result-message");
 const playerScore = document.getElementById("player-score");
 const computerScore = document.getElementById("computer-score");
 
@@ -35,22 +44,38 @@ function getRandomNumber(){
 function youWin(playerSelection, computerSelection){
     const currentScore = getScore();
     setScore(currentScore.playerScore+ 1, currentScore.computerScore);
+    playerScore.textContent = currentScore.playerScore;
 
+    resultMessage.textContent = "You win " + playerSelection + " beats " + computerSelection;
     return "You win " + playerSelection + " beats " + computerSelection;
 }
 function youLose(playerSelection, computerSelection){
     const currentScore = getScore();
     setScore(currentScore.playerScore, currentScore.computerScore + 1);
+    computerScore.textContent = currentScore.computerScore;
 
+    resultMessage.textContent = "You lose " + computerSelection + " beats " + playerSelection;
     return "You lose " + computerSelection + " beats " + playerSelection;
+}
+
+function displayRound(){
+    roundCount.textContent = "Round " + getRoundCount();
 }
 
 function declareWinner(){
     if(score.playerScore > score.computerScore){
+        resultMessage.textContent = "Congratulations you won! " + score.playerScore + " to " + score.computerScore;
         console.log("Congratulations you won! " + score.playerScore + " to " + score.computerScore);
     }else{
+        resultMessage.textContent = "Sorry, you lost...try again. " + score.computerScore + " to " + score.playerScore;
         console.log("Sorry, you lost...try again. " + score.computerScore + " to " + score.playerScore);
     }
+}
+function disableGame(){
+    const btns = document.querySelectorAll(".btn");
+    btns.forEach((button) => {
+        button.disabled = true;
+    })
 }
 
 function playRound(playerSelection){
@@ -60,6 +85,8 @@ function playRound(playerSelection){
     console.log("player: " + playerSelection);
     console.log("computer: " + computerSelection);
     console.log(getScore());
+    setRound();
+    displayRound();
     if(lowerCaseInput !== computerSelection){
         if(lowerCaseInput === "rock" && computerSelection === "scissors"){
             return youWin(lowerCaseInput, computerSelection);
@@ -75,6 +102,7 @@ function playRound(playerSelection){
             return youLose(lowerCaseInput, computerSelection);
         }
     }else{
+        resultMessage.textContent = "Tie, play again!";
         return "Tie, play again!";
     }
 
@@ -92,8 +120,10 @@ function game(){
         button.addEventListener("click", () => {
             results = playRound(button.id);
             console.log(results);
-            if(currentScore.computerScore === 5 || currentScore.playerScore === 5)
+            if(currentScore.computerScore === 5 || currentScore.playerScore === 5) {
                 declareWinner();
+                disableGame();
+            }
         })
     });
 
