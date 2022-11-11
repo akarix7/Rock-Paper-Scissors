@@ -9,6 +9,11 @@ const setScore = (player, computer) => {
     score.computerScore = computer;
 };
 
+const round = document.getElementById("round-msg");
+const resultMessage = document.getElementsByClassName("result-message");
+const playerScore = document.getElementById("player-score");
+const computerScore = document.getElementById("computer-score");
+
 function getComputerChoice(){
     let randNum = getRandomNumber();
     switch(randNum){
@@ -42,9 +47,9 @@ function youLose(playerSelection, computerSelection){
 
 function declareWinner(){
     if(score.playerScore > score.computerScore){
-        console.log("Congratulations you won!" + score.playerScore + " to " + score.computerScore);
+        console.log("Congratulations you won! " + score.playerScore + " to " + score.computerScore);
     }else{
-        console.log("Sorry, you lost...try again." + score.computerScore + " to " + score.playerScore);
+        console.log("Sorry, you lost...try again. " + score.computerScore + " to " + score.playerScore);
     }
 }
 
@@ -87,12 +92,10 @@ function game(){
         button.addEventListener("click", () => {
             results = playRound(button.id);
             console.log(results);
-            if(score.computerScore === 5 || score.playerScore === 5)
+            if(currentScore.computerScore === 5 || currentScore.playerScore === 5)
                 declareWinner();
         })
     });
-
-    console.log("HEY Y'ALL");
 
 }
 
