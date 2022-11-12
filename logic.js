@@ -59,15 +59,16 @@ function youLose(playerSelection, computerSelection){
 }
 
 function displayRound(){
+    roundCount.style.fontSize = "35px";
     roundCount.textContent = "Round " + getRoundCount();
 }
 
 function declareWinner(){
     if(score.playerScore > score.computerScore){
-        resultMessage.textContent = "Congratulations you won! " + score.playerScore + " to " + score.computerScore;
+        resultMessage.textContent = "Congratulations you won! ";
         console.log("Congratulations you won! " + score.playerScore + " to " + score.computerScore);
     }else{
-        resultMessage.textContent = "Sorry, you lost...try again. " + score.computerScore + " to " + score.playerScore;
+        resultMessage.textContent = "Sorry, you lost...try again. ";
         console.log("Sorry, you lost...try again. " + score.computerScore + " to " + score.playerScore);
     }
 }

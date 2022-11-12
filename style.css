@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #EFE1BA;
+    text-align: center;
+    font-family: "Dancing Script", sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 50px;
+}
+
+h2#round-msg{
+    font-size: 28px;
+}
+
+#results{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+#result-message{
+    font-size: 34px;
+}
+
+.player{
+    padding: 15px;
+    margin: 8px;
+}
+
+footer{
+    font-family: "Roboto Light", sans-serif;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-top: auto;
+}
+
+#github{
+    width: 15px;
+    height: auto;
+}
+
+footer span{
+    text-transform: uppercase;
+}
